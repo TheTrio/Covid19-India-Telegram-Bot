@@ -31,3 +31,10 @@ Displays the data for a particular Indian district. Requires a state code and di
 
 Whenever you feel lost
 
+## Dependencies
+
+1. [python-telegram-bot](https://python-telegram-bot.org/)
+2. [matplotlib](https://matplotlib.org/)
+3. [numpy](https://numpy.org/)
+4. [pytz](https://pypi.org/project/pytz/)
+5. [requests](https://requests.readthedocs.io/en/master/)
