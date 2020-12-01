@@ -5,7 +5,9 @@
  
 You're expected to have an API Token for your Telegram chat bot, and that is to be saved in a file named `token`, located in the same directory as the rest of these files. If you're not sure what that means, please read [this](https://www.siteguarding.com/en/how-to-get-telegram-bot-api-token) quick and easy tutorial.
 
-Once that's set up, you just need to run the bot with `python Bot.py`. 
+You must also make a variable named `chat_id` with the chat_id of the user you wish to send regular updates to. Presently, this bot sends updates to users at 19:30 [UTC](time.is/utc)
+
+Once all that's set up, you just need to run the bot with `python Bot.py`. 
 
 ## Available commands 
 
