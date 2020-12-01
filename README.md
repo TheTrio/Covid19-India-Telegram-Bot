@@ -1,6 +1,11 @@
 # Covid19 Telegram Bot
  A general purpose bot for accessing the latest information about Covid19 in India
  
+ ## Sources
+ 
+1. [Covid19 India](https://github.com/covid19india/api)
+2. [Pomber Covid19](https://github.com/pomber/covid19)
+ 
  ## How to use
  
 You're expected to have an API Token for your Telegram chat bot, and that is to be saved in a file named `token`, located in the same directory as the rest of these files. If you're not sure what that means, please read [this](https://www.siteguarding.com/en/how-to-get-telegram-bot-api-token) quick and easy tutorial.
