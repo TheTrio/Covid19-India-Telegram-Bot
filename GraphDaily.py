@@ -77,7 +77,7 @@ def states(params):
     data = r.json()
     for state in data['states_daily']:
         if state['status']=='Confirmed':
-            dates.append(datetime.strptime(state['date'], '%d-%b-%y'))
+            dates.append(datetime.strptime(state['date'].replace('Sept', 'Sep'), '%d-%b-%y'))
             for i in range(1,len(params)):
                 if params[i].lower() in nums:
                     if choice==2:
