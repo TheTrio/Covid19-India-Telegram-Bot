@@ -4,7 +4,7 @@ Covid19 has impacted the world in a way previously unimaginable. Yet if you were
 
 Our Telegram Bot aims to fix that problem. Just message [@MyTelegramCovidBot](https://web.telegram.org/#/im?p=@MyTelegramCovidBot) on Telegram, and get started
 
-### Problems
+## Problems
 
 At the heart of this project is our desire to make everyone more aware of the pandemic. Keeping this in mind, we aim to do the following- 
 
@@ -13,12 +13,12 @@ At the heart of this project is our desire to make everyone more aware of the pa
 3. Decrease the time spent by people to research about various aspects of the pandemic
 4. Use existing technologies to make sure everyone can access the information
 
-### Why Us
+## Why Us
 
 We realize that public trust in news organizations is at an all time low. With the rapid spread of fake news over the internet, its very difficult to tell facts from fiction. 
 
 For this reason, we decided that all our data would come either from The Ministry of Health, or the WHO. This ensures trust in our services, and reduces chances of errors, and ommissions. 
 
-### Contact us
+## Contact us
 
 Think you have encountered a bug? Found some inconsistency in our data? Or have a suggestion for our Bot? Write to us at shashwatkhanna312@gmail.com. We appreciate every response we receive. 
