@@ -1,37 +1,24 @@
-## Welcome to GitHub Pages
+## Introduction
 
-You can use the [editor on GitHub](https://github.com/TheTrio/Covid19-India-Telegram-Bot/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Covid19 has impacted the world in a way previously unimaginable. Yet if you were to try and gather information about this pandemic - ranging from simple things like number of daily cases to more complicated ones like Positivity ratio over the last 3 months - you'd find that there is no central database for easy access. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Our Telegram Bot aims to fix that problem. Just message [@MyTelegramCovidBot](https://web.telegram.org/#/im?p=@MyTelegramCovidBot) on Telegram, and get started
 
-### Markdown
+### Problems
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+At the heart of this project is our desire to make everyone more aware of the pandemic. Keeping this in mind, we aim to do the following- 
 
-```markdown
-Syntax highlighted code block
+1. Counter fake news spread by mainstream and fringe news organizations
+2. Let the user make their own assessment by presenting them with accurate data in the form of easy to understand graphs
+3. Decrease the time spent by people to research about various aspects of the pandemic
+4. Use existing technologies to make sure everyone can access the information
 
-# Header 1
-## Header 2
-### Header 3
+### Why Us
 
-- Bulleted
-- List
+We realize that public trust in news organizations is at an all time low. With the rapid spread of fake news over the internet, its very difficult to tell facts from fiction. 
 
-1. Numbered
-2. List
+For this reason, we decided that all our data would come either from The Ministry of Health, or the WHO. This ensures trust in our services, and reduces chances of errors, and ommissions. 
 
-**Bold** and _Italic_ and `Code` text
+### Contact us
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/TheTrio/Covid19-India-Telegram-Bot/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Think you have encountered a bug? Found some inconsistency in our data? Or have a suggestion for our Bot? Write to us at shashwatkhanna312@gmail.com. We appreciate every response we receive. 
