@@ -23,7 +23,7 @@ For this reason, we decided that all our data would come either from The Ministr
 
 ## APIs
 
-The Ministry of Health and the WHO unfortunately don't have a public API for requesting data related to the pandemic. This means that you can only access a day or two old data using their website. [Covid19India](https://www.covid19india.org/) has a free and [open source API](https://github.com/covid19india/api) There data is taken from the Ministry of Health and other state governments. 
+The Ministry of Health and the WHO unfortunately don't have a public API for requesting data related to the pandemic. This means that you can only access a day or two old data using their website. [Covid19India](https://www.covid19india.org/) has a free and [open source API](https://github.com/covid19india/api) Their data is taken from the [Ministry of Health](https://www.mohfw.gov.in/) and other state governments. 
 
 Similarly, a user named Pomber has a [public API](https://github.com/pomber/covid19) which keeps tracks of Covid data around the world sourced from the [WHO](https://www.who.int/) and [John Hopkins University](https://coronavirus.jhu.edu/map.html)
 
