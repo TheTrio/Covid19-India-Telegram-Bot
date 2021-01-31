@@ -25,7 +25,7 @@ Follow it by 'line' and then the countries(separated by commas)to plot the movin
 
 With daily, you can either choose to plot the cases of India's states or the countries around the world For Indian states, type '/graph daily India total UP MH' where total can be replaced with 'new' for new cases on that day. To view state codes, type '/statecodes'. For country codes, type '/countrycodes' To plot a graph for countries, type '/graph daily world new US,India'
 
-#### `/update` 
+### `/update` 
 
 Fetches the latest data and displays it.
 
