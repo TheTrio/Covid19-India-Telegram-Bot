@@ -31,7 +31,7 @@ Without these public APIs our project would not have been possible and we thank 
 
 ## How To Use
 
-The commands the bot takes, and their various parameters can be viewed by sending `/help` to the Telegram bot. 
+The commands the bot takes, and their various parameters can be viewed by sending `/help` to the Telegram bot. However, for new users we recommend using the query builder which provides a hassle free approach to getting your desired information. To use the in built query builder, type `/helpmode`
 
 ## Contact us
 
