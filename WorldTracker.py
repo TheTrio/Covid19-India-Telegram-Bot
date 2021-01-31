@@ -49,7 +49,7 @@ def WeeklyAverage(countries):
 
 def DailyCases(countries):
     data = requests.get('https://pomber.github.io/covid19/timeseries.json').json()
-    date_format = mpl_dates.DateFormatter('%b %d')
+    date_format = mpl_dates.DateFormatter('%b %Y')
     plt.style.use('seaborn')
     plt.figure(figsize=(10,5))
 
@@ -78,7 +78,7 @@ def DailyCases(countries):
 def CumulativeCases(countries):
     plt.style.use('seaborn')
     data = requests.get('https://pomber.github.io/covid19/timeseries.json').json()
-    date_format = mpl_dates.DateFormatter('%b %d')
+    date_format = mpl_dates.DateFormatter('%b %Y')
     plt.figure(figsize=(10,5))
     plt.ticklabel_format(style='plain', axis='y')
     plt.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))

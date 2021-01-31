@@ -3,6 +3,7 @@ import urllib.request
 import matplotlib.pyplot as plt
 import numpy as np
 from datetime import timedelta,datetime
+import matplotlib.dates as mpl_dates
 import sys
 
 def update():
@@ -13,16 +14,13 @@ def update():
     data = json.load(jsonurl)
     if last==len(data['states_daily']):
         return
-    plt.figure(figsize=(50, 30))
+    fig, ax = plt.subplots()
+    fig.set_figheight(5)
+    fig.set_figwidth(10)
     plt.style.use('fivethirtyeight')
-    plt.rc('xtick', labelsize=30)
-    plt.rc('axes', labelsize=70)
-    plt.rc('axes', titlesize=100)
-    plt.rc('ytick', labelsize=70)
-    plt.xlabel('First day of week', labelpad=40)
+    plt.xlabel('First day of week')
     plt.title('7 day moving average since March 14')
-    plt.ylabel('New cases', labelpad=40)
-
+    plt.ylabel('New cases')
     avg = []
     week_day = 0
     total = 0
@@ -44,13 +42,14 @@ def update():
     start_date = datetime(year=2020, month=3, day=14)
     names = []
     for i in range(no_of_days):
-        names.append(start_date.strftime('%d %b'))
+        names.append(start_date)
         start_date = start_date + timedelta(days=7)
-    x_labels = np.arange(len(avg))
-    x_labels = [4*x for x in x_labels]
-    plt.xticks(ticks=x_labels, labels=names)
-    plt.bar(x_labels,avg, width=2)
-    plt.savefig('GraphWeekly.png')
+    date_format = mpl_dates.DateFormatter('%b %Y')
+    ax.xaxis.set_major_formatter(date_format)
+    fig.autofmt_xdate()
+    ax.bar(names, avg, width=2)
+    ax.xaxis_date()
+    fig.savefig('GraphWeekly.png')
 
     with open('Last.txt', 'w') as f:
         f.write(str(len(data['states_daily'])))
