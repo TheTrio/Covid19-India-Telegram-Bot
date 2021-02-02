@@ -6,6 +6,7 @@ class Tree:
         graph = Node('graph','This is used to generate graphs',command='/graph')
         update = Node('update', 'This updates you about the latest Covid19 numbers in India',command='/update')
         district = Node('district','This gives you information about the spread of Covid19 in your district',command='/district')
+        factcheck = Node('factcheck', 'Searches across multiple fact checking websites and displays the top 3 results', command='/factcheck')
         daily = Node('daily', 'Use this if you want to plot a graph of the number of cases on each day')
         total = Node('total', 'Use this if you want to plot a graph of the cumulative cases')
         new = Node('new', 'Use this if you want to plot a graph of new cases')
@@ -19,4 +20,4 @@ class Tree:
         line = Node('line', 'Use this if you want a line chart')
         weekly.children = [bar, line]
         graph.children = [daily, weekly]
-        self.children = [help, graph, update, district]
+        self.children = [help, graph, update, district, factcheck]

@@ -11,10 +11,11 @@ from datetime import timedelta
 import WorldTracker
 from FactCheck import find
 from Tree import Tree
+import re
 
 timezone_IST = pytz.timezone('Asia/Kolkata')
 rem_time = time(19,30)
-my_id = MY_ID
+my_id = 1143044528
 
 with open('token', 'r') as f:
     token = f.read()
@@ -185,11 +186,16 @@ def countryList(update, context):
         countries_list_str += f.read()
     context.bot.send_message(chat_id=update.effective_chat.id, text=countries_list_str)
 
+def makefactcheck(update, context,queries):
+    queries.append('covid')
+    queries.append('coronavirus')
+    results = find(queries)
+    for result in results[0:3]:
+        context.bot.send_message(chat_id=update.effective_chat.id, text=result['unescapedUrl'])
+
 def factcheck(update, context):
-    links = find()
-    print(links)
-    for link in links[0:1]:
-        context.bot.send_message(chat_id=update.effective_chat.id, text=link)
+    queries = context.args
+    makefactcheck(update, context, queries)
 
 def executeCommand(update, context, args):
     if args[0]=='/graph':
@@ -200,6 +206,9 @@ def executeCommand(update, context, args):
         upd(update,context)
     elif args[0]=='/district':
         makeDistrict(update, context,args[1:])
+    elif args[0]=='/factcheck':
+        print(args)
+        makefactcheck(update, context, args[1:])
 
 def txtDo(update, context):
     global tree
@@ -229,9 +238,20 @@ def txtDo(update, context):
             tree = Tree()
             queryString = ''
             return
-        elif len(tree.children)==0:
+        elif len(tree.children)==0 and tree.name=='factcheck':
             newArgs = queryString.strip().split(' ')
-            newArgs.extend(inputStr.strip().split(','))
+            newArgs.extend(inputStr.strip().split(' '))
+            executeCommand(update, context, newArgs)
+            helpMode  = False
+            tree = Tree()
+            queryString = ''
+            context.bot.send_message(chat_id=update.effective_chat.id, text=f'Helpmode has been set to false\. If you want to generate another query, just type `/helpmode`', parse_mode='MarkdownV2')
+
+            return
+        elif len(tree.children)==0:
+            inputStr = re.sub('\s+', '', inputStr)
+            newArgs = queryString.strip().split(' ')
+            newArgs.extend(inputStr.split(','))
             print(newArgs)
             helpMode  = False
             tree = Tree()
@@ -245,11 +265,18 @@ def txtDo(update, context):
             queryString += choice.command + ' '
             tree = choice
         if len(tree.children)==0:
-            if tree.name=='new' or tree.name=='total' or tree.name=='line':
+            if tree.name=='new' or tree.name=='total':
                 outputStr = '''
 Type a ,(comma) separated list of states/countries you want to plot. For example, if you want to plot Maharashtra and Delhi, type MH,DL
 
 Not aware of the state/country codes? Type /countrycodes or /statecodes as per your need
+                '''
+                context.bot.send_message(chat_id=update.effective_chat.id, text=outputStr)
+            elif tree.name=='line':
+                outputStr = '''
+Type a ,(comma) separated list of countries you want to plot. For example, if you want to plot India and Brazil, type India,Brazil
+
+Not aware of the country codes? Type /countrycodes
                 '''
                 context.bot.send_message(chat_id=update.effective_chat.id, text=outputStr)
             elif tree.name=='district':
@@ -261,7 +288,11 @@ Not aware of the state codes? Type /statecodes to view them\.
 If you wish to view the names of all districts in a particular state, type `/district statecode`\. For example, `/district UP`
                 '''
                 context.bot.send_message(chat_id=update.effective_chat.id, text=outputStr,parse_mode='MarkdownV2')
-
+            elif tree.name=='factcheck':
+                outputStr = '''
+Please type what you want to factcheck about\. For example, if you want factcheck conspiracy theories relating 5G to the pademic, you can type `5G`\. If you have multiple queries, separate them by a space\. 
+                '''
+                context.bot.send_message(chat_id=update.effective_chat.id, text=outputStr,parse_mode='MarkdownV2')
             else:
                 tree = Tree()
                 context.bot.send_message(chat_id=update.effective_chat.id, text=f'Your requested command is `{queryString}`', parse_mode='MarkdownV2')
