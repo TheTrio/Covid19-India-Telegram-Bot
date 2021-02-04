@@ -21,44 +21,44 @@ timezone_IST = pytz.timezone('Asia/Kolkata')
 rem_time = time(19,30)
 my_id = 1143044528
 states_codes = {
-    'Andaman and Nicobar Islands':'AN',
-    'Andhra Pradesh':'AP',
-    'Arunachal Pradesh':'AR',
-    'Assam':'AS',
-    'Bihar':'BR',
-    'Chandigarh':'CH',
-    'Chhattisgarh':'CT',
-    'Daman and Diu':'DD',
-    'Delhi':'DL',
-    'Dadra and Nagar Haveli':'DN',
-    'Goa': 'GA',
-    'Gujarat':'GJ',
-    'Himachal Pradesh':'HP',
-    'Haryana':'HR',
-    'Jharkhand':'JH',
-    'Ladakh':'LA',
-    'Karnataka':'KA',
-    'Kerala':'KL',
-    'Lakshadweep':'LD',
-    'Maharashtra':'MH',
-    'Meghalaya':'ML',
-    'Manipur':'MN',
-    'Madhya Pradesh':'MP',
-    'Mizoram':'MZ',
-    'Nagaland':'NL',
-    'Odisha':'OR',
-    'Punjab':'PB',
-    'Puducherry':'PY',
-    'Rajasthan':'RJ',
-    'Sikkim':'SK',
-    'Telangana':'TG',
-    'Tamil Nadu':'TN',
-    'Tripura':'TR',
-    'Uttar Pradesh':'UP',
-    'Uttarakhand':'UT',
-    'West Bengal':'WB',
-    'Jammu and Kashmir':'JK',
-    'India':'TT'
+    'andaman and nicobar islands':'AN',
+    'andhra pradesh':'AP',
+    'arunachal pradesh':'AR',
+    'assam':'AS',
+    'bihar':'BR',
+    'chandigarh':'CH',
+    'chhattisgarh':'CT',
+    'daman and diu':'DD',
+    'delhi':'DL',
+    'dadra and nagar haveli':'DN',
+    'goa': 'GA',
+    'gujarat':'GJ',
+    'himachal pradesh':'HP',
+    'haryana':'HR',
+    'jharkhand':'JH',
+    'ladakh':'LA',
+    'karnataka':'KA',
+    'kerala':'KL',
+    'lakshadweep':'LD',
+    'maharashtra':'MH',
+    'meghalaya':'ML',
+    'manipur':'MN',
+    'madhya pradesh':'MP',
+    'mizoram':'MZ',
+    'nagaland':'NL',
+    'odisha':'OR',
+    'punjab':'PB',
+    'puducherry':'PY',
+    'rajasthan':'RJ',
+    'sikkim':'SK',
+    'telangana':'TG',
+    'tamil nadu':'TN',
+    'tripura':'TR',
+    'uttar pradesh':'UP',
+    'uttarakhand':'UT',
+    'west bengal':'WB',
+    'jammu and kashmir':'JK',
+    'india':'TT'
 }
 with open('countries.txt') as f:
     countries_list = list(map(lambda x : x.replace('\n', ''), f.readlines()))
@@ -140,22 +140,22 @@ def countrycodes(update, context):
 
 def convert_to_code(state):
     if len(state)==2:
-        return state
+        return state.upper()
     else:
         return states_codes[state]
 
-def makeGraph(update, context, args, parse=True):
-    command_str = ' '.join(args)
-    command = Compiler.get_command(command_str, ['daily', 'india', 'new', 'line', 'bar', 'total', 'world', 'weekly']).get_sorted_command()
-    command.convert()
-    args_updated = []
-    for token in command.command:
-        args_updated.append(token.name)
-    countries_comma_str = ','.join(command.countries)
-    if len(countries_comma_str)!=0:
-        args_updated.append(countries_comma_str)
-    args = args_updated
-    print(args)
+def makeGraph(update, context, args, parse=True, doHelp=False):
+    if doHelp:
+        command_str = ' '.join(args)
+        command = Compiler.get_command(command_str, ['daily', 'india', 'new', 'line', 'bar', 'total', 'world', 'weekly'], countries_list, states_list).get_sorted_command()
+        command.convert()
+        print(command.get_str(), command.countries)
+        args_updated = []
+        for token in command.command:
+            args_updated.append(token.name)
+        if len(command.countries)!=0:
+            args_updated.extend(command.countries)
+        args = args_updated
     try:
         if args[0].lower()=='weekly':
             if len(args)==1:
@@ -195,7 +195,7 @@ def makeGraph(update, context, args, parse=True):
                         args = list(map(lambda z: z.strip(), filter(lambda x: len(x.strip())>0,args.split(','))))
                     else:
                         args = args[2:]
-                    args = list(map(lambda x : Utils.find_closest_state(update,context, states_list, x), args))
+                    args = list(map(lambda x : Utils.find_closest_state(update,context, states_list, x.lower()), args))
                     args = list(map(convert_to_code, args))
                     status = GraphDaily.states(args, choice)
                     if status=='Success':
@@ -241,7 +241,7 @@ def district(update, context):
     if len(args)==0:
         context.bot.send_message(update.effective_chat.id, text="There don't seem to be enough arguments for me to execute that command")
     elif len(args)==1:
-        args[0] = Utils.find_closest_state(update, context, states_list, args[0])
+        args[0] = Utils.find_closest_state(update, context, states_list, args[0].lower())
         args[0] = convert_to_code(args[0])
         Text = DistrictInfo.getDistricts(args[0])
         context.bot.send_message(update.effective_chat.id, text=Text)
@@ -250,7 +250,9 @@ def district(update, context):
 
 def makeDistrict(update, context, args):
     district_name = ' '.join([args[i].title() for i in range(1,len(args))])
-    args[0] = Utils.find_closest_state(update, context, states_list, args[0])
+    district_name = district_name.title()
+    args[0] = args[0].lower()
+    args[0] = Utils.find_closest_state(update, context, states_list, args[0].lower())
     args[0] = convert_to_code(args[0])
     district_name = Utils.find_closest_match(update, context, DistrictInfo.get_district_list(args[0]), district_name)[0]
     print(args[0], district_name[0])
@@ -313,10 +315,11 @@ def reset_user(user):
 
 
 def txtDo(update, context):
+    make_user(update,context)
     current_user = running_users[update.effective_user.id]
+    inputStr = update.message.text_markdown
     if current_user.help_mode:
         print('hey')
-        inputStr = update.message.text_markdown
         if inputStr.lower() == 'exit':
             reset_user(current_user)
             context.bot.send_message(chat_id=update.effective_chat.id, text=f'Exited from HelpMode\. If you want to enable it, type `/helpmode`', parse_mode='MarkdownV2')
@@ -397,7 +400,10 @@ Please type what you want to factcheck about\. For example, if you want factchec
             for child in current_user.tree.children:
                 outputStr += child.getHelp() + '\n\n'
             context.bot.send_message(chat_id=update.effective_chat.id, text=outputStr, parse_mode='MarkdownV2')
-def helpmode(update, context):
+    else:
+        makeGraph(update,context, inputStr.strip().split(' '), False, True)
+
+def make_user(update, context):
     current_user_obj = {
         'fname':update.effective_user.first_name,
         'lname':update.effective_user.last_name,
@@ -406,7 +412,9 @@ def helpmode(update, context):
     }
     if current_user_obj['id'] not in running_users:
         running_users[current_user_obj['id']] = User(current_user_obj['fname'], current_user_obj['lname'], current_user_obj['username'])
-    
+
+def helpmode(update, context):
+    make_user(update, context)
     current_user = running_users[update.effective_user.id]
     current_user.help_mode = not current_user.help_mode
     outputStr = '''
