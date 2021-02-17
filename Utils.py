@@ -1,8 +1,17 @@
 import nltk
+import enchant
 class Utils:
-    
+    d = enchant.Dict("en_US")
     def find_closest_match(update,context,sample_space,word): # Finds the closest match for the given word in the provided sample space
+        print(word)
         word = word.title().replace('And', 'and')
+        if word.lower()=='us':
+            print('fuck you')
+            word = 'US'
+        if word.lower()=='uk':
+            word = 'United Kingdom'
+        if len(word)==2:
+            word = 'US'
         str_distance = []
         for item in sample_space:
             closeness = nltk.edit_distance(item, word) # Generates the Levenshtein distance of the two words. More http://en.wikipedia.org/wiki/Levenshtein_distance
@@ -35,6 +44,8 @@ class Utils:
         context.bot.send_message(chat_id=update.effective_chat.id, text=f"Couldn't find a match for {word}. Using {sample_space[max_index]} instead.")
         return sample_space[max_index]
     def is_country(term, countries):
-        return term.title().replace('And', 'and') in countries
+        return term.title().replace('And', 'and').replace('Us', 'US').replace('Uk', 'United Kingdom') in countries
     def is_state(term, states):
         return term.lower() in states
+    def is_valid_word(word):
+        return Utils.d.check(word)

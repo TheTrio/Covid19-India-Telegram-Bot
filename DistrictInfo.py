@@ -54,11 +54,34 @@ def getData(state, district):
         output_str += 'Testing Data last updated on :\t' + dis['meta']['tested']['last_updated'] + '\n'
     except:
         output_str += 'Testing Data last updated on :\t Not available\n'
-    output_str += '-'*40 + '\n'
+    output_str += '-'*60 + '\n'
 
-    for k,v in dis['total'].items():
-        output_str += k.title() + ' :\t' + str(v) + '\n'
+    Fatality_Rate = '{:.2%}'.format(int(dis['total']['deceased'])/int(dis['total']['confirmed']))
+    Recovery_Rate = '{:.2%}'.format(int(dis['total']['recovered'])/int(dis['total']['confirmed']))
+    if 'deceased' not in dis['delta']:
+        dis['delta']['deceased'] = 0
+    if 'confirmed' not in dis['delta']:
+        dis['delta']['confirmed'] = 0
+    if 'recovered' not in dis['delta']:
+        dis['delta']['recovered'] = 0
+    output_str += f'''
+New Cases: {int(dis['delta']['confirmed']):,} 
+New Deaths: {int(dis['delta']['deceased']):,} 
+New Recoveries: {int(dis['delta']['recovered']):,} 
+
+Total Tests : {int(dis['total']['tested']):,}
+Total Confirmed Cases: {int(dis['total']['confirmed']):,}
+Total Recoveries : {int(dis['total']['recovered']):,}
+Total Deaths : {int(dis['total']['deceased']):,}
+'''
+    if 'migrated' in dis['total']:
+        output_str+=f"Total Migrated : {int(dis['total']['migrated']):,}\n"
+    output_str+=f'''
+Fatality rate : {Fatality_Rate}
+Recovery rate : {Recovery_Rate}
+'''
     return output_str
+
 
 def getDistricts(state):
     data = requests.get('https://api.covid19india.org/v3/data.json').json()
@@ -67,3 +90,7 @@ def getDistricts(state):
         if d.title()!='Unknown':
             output_str += d.title() + '\n'
     return output_str
+
+def get_district_list(state):
+    data = requests.get('https://api.covid19india.org/v3/data.json').json()
+    return list(data[state.upper()]['districts'].keys())
