@@ -6,7 +6,6 @@ class Utils:
         print(word)
         word = word.title().replace('And', 'and')
         if word.lower()=='us':
-            print('fuck you')
             word = 'US'
         if word.lower()=='uk':
             word = 'United Kingdom'
