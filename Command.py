@@ -46,13 +46,13 @@ class Command:
         elif len(self.countries)!=0 and len(self.command)>=1 and 'india' in self.command and 'new' in self.command:
             self.command = [Token('daily'), Token('India'), Token('new')]
         elif len(self.countries)==0 and len(self.command)>=1 and 'india' in self.command and 'new' in self.command:
-            self.command = [Token('daily'), Token('India'), Token('new')]
-            self.countries = ['TT']
+            self.command = [Token('daily'), Token('World'), Token('new')]
+            self.countries = ['India']
         elif len(self.countries)!=0 and len(self.command)>=1 and 'india' in self.command and 'total' in self.command:
             self.command = [Token('daily'), Token('India'), Token('total')]
         elif len(self.countries)==0 and len(self.command)>=1 and 'india' in self.command and 'total' in self.command:
-            self.command = [Token('daily'), Token('India'), Token('total')]
-            self.countries = ['TT']
+            self.command = [Token('daily'), Token('World'), Token('total')]
+            self.countries = ['India']
         elif len(self.countries)==0 and len(self.command)>=1 and 'bar' in self.command:
             self.command = [Token('weekly'), Token('bar')]
         elif len(self.countries)==0 and len(self.command)>=1 and 'weekly' in self.command:

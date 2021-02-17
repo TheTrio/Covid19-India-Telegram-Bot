@@ -149,7 +149,6 @@ def makeGraph(update, context, args, parse=True, doHelp=False):
         command_str = ' '.join(args)
         command = Compiler.get_command(command_str, ['daily', 'india', 'new', 'line', 'bar', 'total', 'world', 'weekly'], countries_list, states_list).get_sorted_command()
         command.convert()
-        print(command.get_str(), command.countries)
         args_updated = []
         for token in command.command:
             args_updated.append(token.name)
@@ -162,7 +161,6 @@ def makeGraph(update, context, args, parse=True, doHelp=False):
                 context.bot.send_message(update.effective_chat.id, text=error_str)
             elif len(args)==2:
                 if args[1]=='bar':
-                    print('hey')
                     GraphWeekly.update()
                     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('GraphWeekly.png', 'rb'))
                 else:
@@ -215,7 +213,6 @@ def makeGraph(update, context, args, parse=True, doHelp=False):
                     else:
                         countries = args
                     countries = list(map(lambda x: Utils.find_closest_match(update, context, countries_list, x)[0], countries))
-                    print(countries)
                     if choice=='new':
                         response = WorldTracker.DailyCases(countries)
                     else:
@@ -255,7 +252,6 @@ def makeDistrict(update, context, args):
     args[0] = Utils.find_closest_state(update, context, states_list, args[0].lower())
     args[0] = convert_to_code(args[0])
     district_name = Utils.find_closest_match(update, context, DistrictInfo.get_district_list(args[0]), district_name)[0]
-    print(args[0], district_name[0])
     Text = DistrictInfo.getData(args[0], district_name)
     context.bot.send_message(update.effective_chat.id, text=Text)
 
@@ -305,7 +301,6 @@ def executeCommand(update, context, args):
     elif args[0]=='/district':
         makeDistrict(update, context,args[1:])
     elif args[0]=='/factcheck':
-        print(args)
         makefactcheck(update, context, args[1:])
 
 def reset_user(user):
@@ -319,7 +314,6 @@ def txtDo(update, context):
     current_user = running_users[update.effective_user.id]
     inputStr = update.message.text_markdown
     if current_user.help_mode:
-        print('hey')
         if inputStr.lower() == 'exit':
             reset_user(current_user)
             context.bot.send_message(chat_id=update.effective_chat.id, text=f'Exited from HelpMode\. If you want to enable it, type `/helpmode`', parse_mode='MarkdownV2')
@@ -349,7 +343,6 @@ def txtDo(update, context):
             inputStr = re.sub('\s*,\s*', ',', inputStr)
             newArgs = current_user.query_string.strip().split(' ')
             newArgs.extend(inputStr.split(','))
-            print(newArgs)
             reset_user(current_user)
             executeCommand(update, context, newArgs)
             context.bot.send_message(chat_id=update.effective_chat.id, text=f'Helpmode has been set to false\. If you want to generate another query, just type `/helpmode`', parse_mode='MarkdownV2')

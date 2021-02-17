@@ -12,12 +12,7 @@ def WeeklyAverage(countries):
     week = timedelta(days=7)
     plt.style.use('seaborn')
     plt.figure(figsize=(10,5))
-
-    for country in countries:
-        if country in data.keys():
-            pass
-        else:
-            return (country + ' is not a valid country name. Please try again.\nNote : Countries entered are case sensitive. That means US is accepted, but Us is not. Please type "/country" without the quotes to view the available countries')
+    
     for country in countries:
         total = 0
         week_day = 0

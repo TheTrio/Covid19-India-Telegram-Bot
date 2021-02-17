@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import matplotlib.dates as mpl_dates
 from datetime import datetime
+from Utils import Utils
 
 states_codes = {
         'AN': 'Andaman and Nicobar Islands',
@@ -46,7 +47,8 @@ states_codes = {
         'TT': 'India'
     }
 
-def states(params):
+def states(params, choice):
+    
     plt.style.use('seaborn')
     plt.figure(figsize=(10,5))
     plt.ticklabel_format(style='plain', axis='y')
@@ -55,38 +57,32 @@ def states(params):
     dates = []
     nums = {}
     cur = 1
-    choice = 0
-    if len(params)==1:
+    if len(params)==0:
         params.append('TT')
-    elif len(params)>11:
+    elif len(params)>10:
         return 'Maximum 10 states can be entered'
     else:
-        for i in range(1,len(params)):
+        for i in range(0,len(params)):
             if params[i].upper() in states_codes:
                 pass
             else:
                 return params[i] + ' is not a valid state code'
     anim = False
-
-    try:
-        choice = int(params[0])
-    except ValueError:
-        return 'Please enter either 1 or 2 after daily. 1 is for daily cases, and 2 for cumulative.'
     r = requests.get('https://api.covid19india.org/states_daily.json')
 
     data = r.json()
     for state in data['states_daily']:
         if state['status']=='Confirmed':
             dates.append(datetime.strptime(state['date'].replace('Sept', 'Sep'), '%d-%b-%y'))
-            for i in range(1,len(params)):
+            for i in range(0,len(params)):
                 if params[i].lower() in nums:
-                    if choice==2:
+                    if choice=='total':
                         nums[params[i].lower()].append(nums[params[i].lower()][-1] + int(state[params[i].lower()]))
                     else:
                         nums[params[i].lower()].append(int(state[params[i].lower()]))
                 else:
                     nums[params[i].lower()] = [int(state[params[i].lower()])]
-    if choice==1:
+    if choice=='new':
         plt.title('Daily increase in cases since Mar 14')
     else:
         plt.title('Total cases')

@@ -19,12 +19,12 @@ class Compiler:
             elif Utils.is_country(param[0], countries_list):
                 countries.append(param[0])
                 country_found = True
-                print('hello')
             elif Utils.is_state(param[0], states_list):
                 countries.append(param[0])
-            elif Utils.is_valid_word(param[0]):
-                print('hello world', param[0])
-                continue
             elif param[1]=='NNP':
                 countries.append(param[0])
+            elif param[0].lower()=='cases':
+                temp = Token('new')
+                if temp not in command_params:
+                    command_params.append(temp)
         return Command(command_params, countries, country_found)
