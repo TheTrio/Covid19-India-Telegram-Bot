@@ -19,7 +19,9 @@ At the heart of this project is our desire to make everyone more aware of the pa
 
 We realize that public trust in news organizations is at an all time low. With the rapid spread of fake news over the internet, its very difficult to tell facts from fiction. 
 
-For this reason, we decided that all our data would come either from The Ministry of Health, or the WHO. This ensures trust in our services, and reduces chances of errors. 
+For this reason, we decided that all our data would come either from The Ministry of Health, or the WHO. This ensures trust in our services, and reduces chances of errors. We also decided to keep this entire project open source, so that anyone can look at our backend to make sure that we aren't doing anything nefarious. 
+
+We did this to prove to our consumers that we have nothing to hide. Anyone can view our code, the information we collect, and everything else. 
 
 ## APIs
 
