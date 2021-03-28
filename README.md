@@ -41,7 +41,13 @@ Whenever you feel lost
 
 Still feel confused? Use our easy and intuitive prompt based query builder by typing `/helpmode`. Recommended for new users
 
-Note: While the bot can understand Natural Language with the help of specific keywords, as expected, its not accurate 100% of the times. Try being as specific as possible to get the best response.
+## Note
+
+While the use of these commands is recommended, its made clear that the bot can understand Natural Language with the help of specific keywords. For example, instead of `/graph daily India total UP MH` you can enter `daily new cases Maharashtra and Delhi`. 
+
+The bot will try to autocorrect, so misspellings of countries and states should work. However, as expected, none of this is perfect. You're advised to be as specific as possible to get the best possible response. If even that fails, try using the `/helpmode`.
+
+Try being as specific as possible to get the best response.
 
 ## Dependencies
 
