@@ -60,10 +60,10 @@ states_codes = {
     'jammu and kashmir': 'JK',
     'india': 'TT'
 }
-with open('countries.txt') as f:
+with open('data/countries.txt') as f:
     countries_list = list(map(lambda x: x.replace('\n', ''), f.readlines()))
 
-with open('states.txt') as f:
+with open('data/states.txt') as f:
     states_list = list(map(lambda x: x.replace('\n', ''), f.readlines()))
 with open('token', 'r') as f:
     token = f.read()
@@ -314,7 +314,7 @@ def upd(update, context):
 
 def countryList(update, context):
     countries_list_str = 'Here are the available countries - \n\n'
-    with open('countries.txt', 'r') as f:
+    with open('data/countries.txt', 'r') as f:
         countries_list_str += f.read()
     context.bot.send_message(
         chat_id=update.effective_chat.id, text=countries_list_str)
