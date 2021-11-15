@@ -1,12 +1,22 @@
 # Covid19 Telegram Bot
- A general purpose bot for accessing the latest information about Covid19 in India
- 
- ## Sources
+A general purpose bot for accessing the latest information about Covid19 in India
+
+# ARCHIVED
+
+[Covid19India](https://github.com/covid19india) stopped [its operations on October 31st, 2021](https://blog.covid19india.org/2021/08/07/end/)
+
+While currently the API is still publicly accessible and can be used to fetch past data, that might change by the time you are reading this. I would like to thank everyone at Covid19India who spent these 16 months building and maintaining something of this quality. 
+
+Since this project primarily relies on Covid19India's API to fetch the latest data, it only makes sense to archive it. 
+
+You're still free to clone and use it. It should still work as expected, albeit with outdated data.
+
+## Sources
  
 1. [Covid19 India](https://github.com/covid19india/api)
 2. [Pomber Covid19](https://github.com/pomber/covid19)
  
- ## How to use
+## How to use
  
  The Bot can be found under @MyTelegramCovidBot on Telegram. Say hello to it from us!
 
