@@ -1,5 +1,5 @@
 # Covid19 Telegram Bot
-A general purpose bot for accessing the latest information about Covid19 in India
+A general purpose bot for accessing the latest information about Covid19 in India. Built for a college project
 
 # ARCHIVED
 
