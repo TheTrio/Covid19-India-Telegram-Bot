@@ -53,7 +53,3 @@ You're expected to have an API Token for your Telegram chat bot, and that is to 
 You must also make a variable named `chat_id` with the chat_id of the user you wish to send regular updates to. Presently, this bot sends updates to users at 19:30 [UTC](time.is/utc)
 
 Once all that's set up, you just need to run the bot with `python Bot.py`. 
-
-## More?
-
-Visit our website [here](https://thetrio.github.io/Covid19-India-Telegram-Bot/)
